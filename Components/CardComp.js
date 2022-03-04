@@ -5,7 +5,7 @@ export default class CardComp extends React.Component {
   render() {
     return (
       
-       
+       <TouchableOpacity>
           <View
             style={{ flexDirection: "row", justifyContent: "space-around" }}
           >
@@ -30,6 +30,7 @@ export default class CardComp extends React.Component {
               <Text style={{ paddingLeft: 10 }}>Description</Text>
             </ScrollView>
         </View>
+        </TouchableOpacity>
     
     );
   }
