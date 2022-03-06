@@ -47,26 +47,33 @@ function CardComp() {
 
 const styles = StyleSheet.create({
   Container: {
-    margin: 10,
+    marginTop:20,
+    padding:10
   },
   Content: {
     flexDirection: "row",
+    paddingLeft:5,
   },
   image: {
     resizeMode: "cover",
     height: 100,
     width: "40%",
+    borderTopLeftRadius:5
   },
   ProductDetails: {
-    backgroundColor: "red",
+    backgroundColor: "skyblue",
     width: "100%",
     height: 100,
+    paddingLeft:5,
+    borderTopRightRadius:10
   },
   BottomButtonView: {
     flexDirection: "row",
     marginTop: 5,
     alignItems: "center",
     justifyContent: "space-between",
+    paddingBottom:5,
+    paddingLeft:5
   },
   ButtonContainer: {
     backgroundColor: "black",
