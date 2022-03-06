@@ -1,23 +1,17 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import Search from './Components/Search';
-import CardComp from './Components/CardComp';
+import React from "react";
+import { StyleSheet, Text, View } from "react-native";
+import CardComp from "./Components/CardComp";
+import Search from "./Components/Search";
 
-export default function App() {
+const App = () => {
   return (
-    <View style={{marginTop:20}}>
-      <Search/>
-      {/* <StatusBar style="auto" /> */}
-      <CardComp/>
+    <View style={{ flex: 1, flexDirection: "column" }}>
+      {/* <Search /> */}
+      <CardComp />
+      
+      
     </View>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    marginTop:10
-  },
-});
+export default App;
