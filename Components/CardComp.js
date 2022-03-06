@@ -24,68 +24,61 @@ function CardComp() {
 
   return (
     <View style={styles.Container}>
-      
-      
-      {movies
-        ? movies.map((data) => {
-          const IMAGE_URL=data.image
-          
-            return (
-              
-              <Card>
-                <View style={styles.Content}>
-                  <Card.Cover
-                    style={styles.image}
-                    source={{ uri:IMAGE_URL}}
-                  />
-                  <ScrollView style={styles.ProductDetails}>
-                    <Text style={{ fontSize: 15, fontWeight: "bold",paddingBottom:10 }}>
-                      {data.title}
-                    </Text>
-                    <Paragraph>{data.description}</Paragraph>
-                  </ScrollView>
-                </View>
+      {movies ? (
+        movies.map((data) => {
+          const IMAGE_URL = data.image;
 
-                <View style={styles.BottomButtonView}>
-                  <View style={{ flexDirection: "row", alignItems: "center" }}>
-                    <View style={styles.ButtonContainer}>
-                      <Button
-                        color="white"
-                        title="+"
-                        onPress={() => console.log("Increment")}
-                      ></Button>
-                    </View>
-
-                    <Text style={{ padding: 10 }}>5</Text>
-
-                    <View style={styles.ButtonContainer}>
-                      <Button
-                        color="white"
-                        title="-"
-                        onPress={() => console.log("Decrement")}
-                      ></Button>
-                    </View>
-                  </View>
-                  <TouchableOpacity
-                    onPress={() => console.log("Added to Cart")}
+          return (
+            <Card>
+              <View style={styles.Content}>
+                <Card.Cover style={styles.image} source={{ uri: IMAGE_URL }} />
+                <ScrollView style={styles.ProductDetails}>
+                  <Text
                     style={{
-                      backgroundColor: "black",
-                      width: 150,
-                      height: 30,
-                      alignItems: "center",
-                      justifyContent: "center",
-                      borderRadius: 10,
+                      fontSize: 15,
+                      fontWeight: "bold",
+                      paddingBottom: 10,
                     }}
                   >
-                    <Text style={{ paddingRight: 10, color: "white" }}>
-                      Add to Cart | ${data.price}
-                    </Text>
+                    {data.title}
+                  </Text>
+                  <Paragraph>{data.description}</Paragraph>
+                </ScrollView>
+              </View>
+
+              <View style={styles.BottomButtonView}>
+                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                  <TouchableOpacity
+                    style={styles.ButtonContainer}
+                    onPress={() => console.log("Increment")}
+                  >
+                    <Text style={{ color: "white" }}>+</Text>
+                  </TouchableOpacity>
+
+                  <Text style={{ padding: 10 }}>5</Text>
+
+                  <TouchableOpacity
+                    style={styles.ButtonContainer}
+                    onPress={() => console.log("Decrement")}
+                  >
+                    <Text style={{ color: "white" }}>-</Text>
                   </TouchableOpacity>
                 </View>
-              </Card>
-            );
-          })
-        : <Text>Getting Data....</Text>}
+                <TouchableOpacity
+                  onPress={() => console.log("Added to Cart")}
+                  style={styles.AddToCart}
+                >
+                  <Text style={{color: "white" }}>
+                   ${data.price}
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </Card>
+          );
+        })
+      ) : (
+        <Text>Getting Data....</Text>
+      )}
     </View>
   );
 }
@@ -119,6 +112,14 @@ const styles = StyleSheet.create({
     paddingBottom: 5,
     paddingLeft: 5,
   },
+  AddToCart:{
+    backgroundColor: "black",
+    width: 70,
+    height: 30,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 10,
+  },
   ButtonContainer: {
     backgroundColor: "black",
     shadowColor: "#000",
@@ -127,8 +128,10 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
     elevation: 5,
     borderRadius: 10,
-    height: 40,
+    height: 30,
     width: 30,
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
 
