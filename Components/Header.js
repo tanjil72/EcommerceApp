@@ -1,22 +1,29 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 
 export default function Header() {
   return (
-    <View
-      style={{
-        width: "100%",
-        height: 70,
-        backgroundColor: "black",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
+    <View style={styles.container}>
       <StatusBar hidden />
-      <Text style={{ color: "white", fontSize: 30, fontWeight: "bold" }}>
-        Let's Shop
-      </Text>
+      <Text style={styles.Header}>Let's Shop</Text>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    width: "100%",
+    height: 40,
+    backgroundColor: "black",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  Header: {
+    color: "white",
+    fontSize: 24,
+    fontWeight: "bold",
+    textDecorationLine: 'underline'
+    
+  },
+});

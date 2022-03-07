@@ -1,12 +1,5 @@
-import React, { useEffect, useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  Button,
-  View,
-  ScrollView,
-  TouchableOpacity,
-} from "react-native";
+import React, { useEffect } from "react";
+import { StyleSheet, Text, View, ScrollView } from "react-native";
 import { Card, Paragraph } from "react-native-paper";
 import { useSelector, useDispatch } from "react-redux";
 import { getMovies } from "../redux/actions";
@@ -14,9 +7,6 @@ import BottomComp from "./BottomComp";
 
 function CardComp() {
   const movies = useSelector((state) => state.moviesReducer.movies);
-  // console.log(".....................................................................................................................................")
-  // console.log(movies[1].id)
-  const [count, setCount] = useState(0);
   const dispatch = useDispatch();
   const fetchMovies = () => dispatch(getMovies());
 
@@ -30,23 +20,14 @@ function CardComp() {
         movies.map((data, i) => {
           const IMAGE_URL = data.image;
           return (
-            <Card key={i}>
+            <Card key={i} style={{marginBottom:10}}>
               <View style={styles.Content}>
                 <Card.Cover style={styles.image} source={{ uri: IMAGE_URL }} />
                 <ScrollView style={styles.ProductDetails}>
-                  <Text
-                    style={{
-                      fontSize: 15,
-                      fontWeight: "bold",
-                      paddingBottom: 10,
-                    }}
-                  >
-                    {data.title}
-                  </Text>
+                  <Text style={styles.Title}>{data.title}</Text>
                   <Paragraph>{data.description}</Paragraph>
                 </ScrollView>
               </View>
-
               <BottomComp i={i} price={data.price} />
             </Card>
           );
@@ -78,6 +59,11 @@ const styles = StyleSheet.create({
     height: 100,
     paddingLeft: 5,
     borderTopRightRadius: 10,
+  },
+  Title: {
+    fontSize: 15,
+    fontWeight: "bold",
+    paddingBottom: 10,
   },
 });
 

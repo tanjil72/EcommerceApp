@@ -16,13 +16,13 @@ export default function BottomComp({ i,price }) {
   };
   return (
     <View style={styles.BottomButtonView} key={i}>
-      <View style={{ flexDirection: "row", alignItems: "center" }}>
+      <View style={styles.CounterView}>
         <TouchableOpacity
           key={i}
           style={styles.ButtonContainer}
           onPress={addCountHandler}
         >
-          <Text style={{ color: "white" }}>+</Text>
+          <Text style={styles.Text}>+</Text>
         </TouchableOpacity>
 
         <Text style={{ padding: 10 }}>{count}</Text>
@@ -31,14 +31,14 @@ export default function BottomComp({ i,price }) {
           style={styles.ButtonContainer}
           onPress={removeCountHandler}
         >
-          <Text style={{ color: "white" }}>-</Text>
+          <Text style={styles.Text}>-</Text>
         </TouchableOpacity>
       </View>
       <TouchableOpacity
         onPress={() => console.log("Added to Cart")}
         style={styles.AddToCart}
       >
-        <Text style={{ color: "white" }}>{count==0?price:price*count}</Text>
+        <Text style={styles.Text}>$ {count==0?price:price*count}</Text>
       </TouchableOpacity>
     </View>
   );
@@ -73,5 +73,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 10,
+    marginRight:5
   },
+  CounterView:{
+    flexDirection: "row", 
+    alignItems: "center"
+  },
+  Text:{
+      color:'white',
+      
+  }
 });
