@@ -49,7 +49,7 @@ const TestComp = () => {
   const ItemView = ({ item }) => {
     const IMAGE_URL = item.image;
     return (
-      <View style={styles.Container}>
+      <View style={styles.container}>
         <Card
           key={item}
           style={{ marginBottom: 10 }}
@@ -85,26 +85,32 @@ const TestComp = () => {
   };
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, backgroundColor: "black" }}>
       <StatusBar hidden />
-      <View style={styles.container}>
-        <SearchBar
-          containerStyle={styles.SearchContainer}
-          inputStyle={{ margin: 0 }}
-          round
-          searchIcon={{ size: 24 }}
-          onChangeText={(text) => searchFilterFunction(text)}
-          onClear={(text) => searchFilterFunction("")}
-          placeholder="Type to Search"
-          value={search}
-        />
-        <FlatList
-          data={filteredDataSource}
-          keyExtractor={(item, index) => index.toString()}
-          //   ItemSeparatorComponent={ItemSeparatorView}
-          renderItem={ItemView}
-        />
-      </View>
+      {movies ? (
+        <View style={{ flex: 1 }}>
+          <SearchBar
+            containerStyle={styles.SearchContainer}
+            inputStyle={{ margin: 0 }}
+            round
+            searchIcon={{ size: 24 }}
+            onChangeText={(text) => searchFilterFunction(text)}
+            onClear={(text) => searchFilterFunction("")}
+            placeholder="Type to Search"
+            value={search}
+          />
+          <View style={styles.FlatlistContainer}>
+            <FlatList
+              data={filteredDataSource}
+              keyExtractor={(item, index) => index.toString()}
+              //   ItemSeparatorComponent={ItemSeparatorView}
+              renderItem={ItemView}
+            />
+          </View>
+        </View>
+      ) : (
+        <Text>Getting Data......</Text>
+      )}
     </View>
   );
 };
@@ -114,13 +120,15 @@ const styles = StyleSheet.create({
     backgroundColor: "black",
     padding: 5,
   },
+  FlatlistContainer: {
+    backgroundColor: "black",
+    padding: 5,
+    flex: 1,
+  },
   itemStyle: {
     padding: 10,
   },
 
-  Container: {
-    padding: 5,
-  },
   Content: {
     flexDirection: "row",
     paddingLeft: 5,
