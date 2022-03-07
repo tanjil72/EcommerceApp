@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -10,11 +10,13 @@ import {
 import { Card, Paragraph } from "react-native-paper";
 import { useSelector, useDispatch } from "react-redux";
 import { getMovies } from "../redux/actions";
+import BottomComp from "./BottomComp";
 
 function CardComp() {
   const movies = useSelector((state) => state.moviesReducer.movies);
   // console.log(".....................................................................................................................................")
   // console.log(movies[1].id)
+  const [count, setCount] = useState(0);
   const dispatch = useDispatch();
   const fetchMovies = () => dispatch(getMovies());
 
@@ -25,11 +27,10 @@ function CardComp() {
   return (
     <View style={styles.Container}>
       {movies ? (
-        movies.map((data) => {
+        movies.map((data, i) => {
           const IMAGE_URL = data.image;
-
           return (
-            <Card>
+            <Card key={i}>
               <View style={styles.Content}>
                 <Card.Cover style={styles.image} source={{ uri: IMAGE_URL }} />
                 <ScrollView style={styles.ProductDetails}>
@@ -46,33 +47,7 @@ function CardComp() {
                 </ScrollView>
               </View>
 
-              <View style={styles.BottomButtonView}>
-                <View style={{ flexDirection: "row", alignItems: "center" }}>
-                  <TouchableOpacity
-                    style={styles.ButtonContainer}
-                    onPress={() => console.log("Increment")}
-                  >
-                    <Text style={{ color: "white" }}>+</Text>
-                  </TouchableOpacity>
-
-                  <Text style={{ padding: 10 }}>5</Text>
-
-                  <TouchableOpacity
-                    style={styles.ButtonContainer}
-                    onPress={() => console.log("Decrement")}
-                  >
-                    <Text style={{ color: "white" }}>-</Text>
-                  </TouchableOpacity>
-                </View>
-                <TouchableOpacity
-                  onPress={() => console.log("Added to Cart")}
-                  style={styles.AddToCart}
-                >
-                  <Text style={{color: "white" }}>
-                   ${data.price}
-                  </Text>
-                </TouchableOpacity>
-              </View>
+              <BottomComp i={i} price={data.price} />
             </Card>
           );
         })
@@ -103,35 +78,6 @@ const styles = StyleSheet.create({
     height: 100,
     paddingLeft: 5,
     borderTopRightRadius: 10,
-  },
-  BottomButtonView: {
-    flexDirection: "row",
-    marginTop: 5,
-    alignItems: "center",
-    justifyContent: "space-between",
-    paddingBottom: 5,
-    paddingLeft: 5,
-  },
-  AddToCart:{
-    backgroundColor: "black",
-    width: 70,
-    height: 30,
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 10,
-  },
-  ButtonContainer: {
-    backgroundColor: "black",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.8,
-    shadowRadius: 2,
-    elevation: 5,
-    borderRadius: 10,
-    height: 30,
-    width: 30,
-    alignItems: "center",
-    justifyContent: "center",
   },
 });
 
