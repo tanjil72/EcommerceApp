@@ -1,27 +1,21 @@
 import React, { useState, useEffect } from "react";
-import {
-  Text,
-  StyleSheet,
-  View,
-  FlatList,
-  ScrollView,
-  StatusBar,
-} from "react-native";
+import {Text,StyleSheet,View,FlatList,ScrollView,StatusBar} from "react-native";
 import { SearchBar } from "react-native-elements";
 import { Card, Paragraph } from "react-native-paper";
 import BottomComp from "./BottomComp";
 import { useSelector, useDispatch } from "react-redux";
-import { getMovies } from "../redux/actions";
+import { GetProducts } from "../redux/actions";
 
-const TestComp = () => {
-  const movies = useSelector((state) => state.moviesReducer.movies);
+const SearchComp = () => {
+  const Products = useSelector((state) => state.ProductReducer.products);
   const dispatch = useDispatch();
-  const fetchMovies = () => dispatch(getMovies());
+  //const fetchProducts = () => dispatch(GetProducts());
+  //console.log(Products)
 
   useEffect(() => {
-    fetchMovies();
-    setFilteredDataSource(movies);
-    setMasterDataSource(movies);
+    dispatch(GetProducts());
+    setFilteredDataSource(Products);
+    setMasterDataSource(Products);
     //   console.log(masterDataSource)
   }, []);
 
@@ -53,7 +47,8 @@ const TestComp = () => {
         <Card
           key={item}
           style={{ marginBottom: 10 }}
-          onPress={() => getItem(item)}
+          //onPress={()=>console.log("Item Added")}
+          //onPress={() => getItem(item)}
         >
           <View style={styles.Content}>
             <Card.Cover style={styles.image} source={{ uri: IMAGE_URL }} />
@@ -62,7 +57,7 @@ const TestComp = () => {
               <Paragraph>{item.description}</Paragraph>
             </ScrollView>
           </View>
-          <BottomComp i={item} price={item.price} />
+          <BottomComp item={item} price={item.price} />
         </Card>
       </View>
     );
@@ -87,7 +82,7 @@ const TestComp = () => {
   return (
     <View style={{ flex: 1, backgroundColor: "black" }}>
       <StatusBar hidden />
-      {movies ? (
+      {Products ? (
         <View style={{ flex: 1 }}>
           <SearchBar
             containerStyle={styles.SearchContainer}
@@ -161,4 +156,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default TestComp;
+export default SearchComp;

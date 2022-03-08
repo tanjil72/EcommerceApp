@@ -1,8 +1,14 @@
 import React, { useState } from "react";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import { useDispatch,useSelector } from "react-redux";
+import { AddToCart } from "../redux/actions";
 
-export default function BottomComp({ i,price }) {
+export default function BottomComp({ item, price }) {
   const [count, setCount] = useState(0);
+
+  const dispatch = useDispatch();
+  //const cartProducts = useSelector((state) => state.ProductReducer.cart);
 
   const addCountHandler = () => {
     setCount(count + 1);
@@ -14,10 +20,18 @@ export default function BottomComp({ i,price }) {
     }
     setCount(count - 1);
   };
+
+  const handleCart = (item) => {
+    //console.log(item.title);
+    dispatch(AddToCart(item));
+    alert("Added to Cart")
+    // console.log(cartProducts)
+  };
+
   return (
-    <View style={styles.BottomButtonView} key={i}>
+    <View style={styles.BottomButtonView} key={item}>
       <View style={styles.CounterView}>
-        <TouchableOpacity
+        {/* <TouchableOpacity
           key={i}
           style={styles.ButtonContainer}
           onPress={addCountHandler}
@@ -32,13 +46,25 @@ export default function BottomComp({ i,price }) {
           onPress={removeCountHandler}
         >
           <Text style={styles.Text}>-</Text>
+        </TouchableOpacity> */}
+
+        <TouchableOpacity
+          // onPress={() => console.log(i.title)}
+          style={styles.AddToCart}
+        >
+          <Text style={styles.Text}>
+            $ {count == 0 ? price : price * count}
+          </Text>
         </TouchableOpacity>
       </View>
       <TouchableOpacity
-        onPress={() => console.log("Added to Cart")}
+        onPress={() => {
+          handleCart(item);
+        }}
         style={styles.AddToCart}
       >
-        <Text style={styles.Text}>$ {count==0?price:price*count}</Text>
+        <Text style={styles.Text}>Add To</Text>
+        <MaterialCommunityIcons name="cart" color="white" size={20} />
       </TouchableOpacity>
     </View>
   );
@@ -68,19 +94,22 @@ const styles = StyleSheet.create({
   },
   AddToCart: {
     backgroundColor: "black",
-    width: 70,
+    width: 80,
     height: 30,
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 10,
-    marginRight:5
+    marginRight: 5,
+    flexDirection: "row",
   },
-  CounterView:{
-    flexDirection: "row", 
-    alignItems: "center"
+  CounterView: {
+    flexDirection: "row",
+    alignItems: "center",
   },
-  Text:{
-      color:'white',
-      
-  }
+  Text: {
+    color: "white",
+    textAlign: "center",
+    alignItems: "center",
+    justifyContent: "center",
+  },
 });
