@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
-import { View, Text, FlatList, Button,StyleSheet,ScrollView } from "react-native";
+import React from "react";
+import { View, Text, FlatList, StyleSheet, ScrollView } from "react-native";
 import { useSelector } from "react-redux";
 import { Card, Paragraph } from "react-native-paper";
 import BottomComp from "./BottomComp";
 export default function Cart() {
   const cartProducts = useSelector((state) => state.ProductReducer.cart);
+
   const ItemView = ({ item }) => {
     const IMAGE_URL = item.image;
     return (
@@ -44,14 +45,6 @@ const styles = StyleSheet.create({
     backgroundColor: "black",
     padding: 5,
   },
-  FlatlistContainer: {
-    backgroundColor: "black",
-    padding: 5,
-    flex: 1,
-  },
-  itemStyle: {
-    padding: 10,
-  },
 
   Content: {
     flexDirection: "row",
@@ -74,13 +67,5 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: "bold",
     paddingBottom: 10,
-  },
-  SearchContainer: {
-    borderRadius: 20,
-    marginBottom: 5,
-    backgroundColor: "black",
-    height: "10%",
-    justifyContent: "center",
-    alignItems: "center",
   },
 });

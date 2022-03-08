@@ -10,7 +10,7 @@ const SearchComp = () => {
   const Products = useSelector((state) => state.ProductReducer.products);
   const dispatch = useDispatch();
   //const fetchProducts = () => dispatch(GetProducts());
-  //console.log(Products)
+  // console.log(Products)
 
   useEffect(() => {
     dispatch(GetProducts());
@@ -42,7 +42,10 @@ const SearchComp = () => {
 
   const ItemView = ({ item }) => {
     const IMAGE_URL = item.image;
+    
     return (
+
+      
       <View style={styles.container}>
         <Card
           key={item}
@@ -74,10 +77,10 @@ const SearchComp = () => {
   //     );
   //   };
 
-  const getItem = (item) => {
-    // Function for click on an item
-    alert("Id : " + item.id + " Title : " + item.title);
-  };
+  // const getItem = (item) => {
+  //   // Function for click on an item
+  //   alert("Id : " + item.id + " Title : " + item.title);
+  // };
 
   return (
     <View style={{ flex: 1, backgroundColor: "black" }}>
