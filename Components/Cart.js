@@ -15,67 +15,80 @@ import Counter from "./Counter";
 
 export default function Cart() {
   const cartProducts = useSelector((state) => state.ProductReducer.cart);
-  const [count, setCount] = useState(0);
-
   const dispatch = useDispatch();
 
-  const addCountHandler = (item) => {
-    setCount(count + 1);
-    console.log(item);
-  };
-
-  const removeCountHandler = () => {
-    if (count === 0) {
-      return;
-    }
-    setCount(count - 1);
-  };
-
-  const handleclick = (item) => {
+  const RemoveItem = (item) => {
     dispatch(removeFromCart(item));
-    // console.log(item.id)
   };
 
   const ItemView = ({ item }) => {
     const IMAGE_URL = item.image;
     return (
-      <View style={styles.container} key={item}>
-        <Card key={item} style={{ marginBottom: 10 }}>
+      <View style={styles.container}>
+        <Card>
           <View style={styles.Content}>
             <View
-              style={{ flex: 1, flexDirection: "row", backgroundColor: "skyblue" }}
+              style={{
+                flex: 1,
+                flexDirection: "row",
+                backgroundColor: "skyblue",
+              }}
             >
               <Card.Cover style={styles.image} source={{ uri: IMAGE_URL }} />
-              
-                <Counter price={item.price} />
-               
-              
+
+              <Counter price={item.price} />
             </View>
             <Text style={styles.Title}>{item.title}</Text>
           </View>
+          <TouchableOpacity
+            onPress={() => {
+              RemoveItem(item);
+            }}
+            style={{
+              backgroundColor: "black",
+              alignItems: "center",
+              borderTopLeftRadius: 5,
+              borderTopRightRadius:5
+            }}
+          >
+            <Text style={{ padding: 5, color: "white" }}>Remove</Text>
+          </TouchableOpacity>
         </Card>
-        <Button title="remove" onPress={() => handleclick(item)}></Button>
       </View>
     );
   };
 
   return (
-    <View>
-      <FlatList
-        data={cartProducts}
-        keyExtractor={(item, index) => index.toString()}
-        //   ItemSeparatorComponent={ItemSeparatorView}
-        renderItem={ItemView}
-      />
+    <View style={{ backgroundColor: "brown", flex: 1 }}>
+      <View style={{ flex: 3 }}>
+        <FlatList
+          data={cartProducts}
+          keyExtractor={(item, index) => index.toString()}
+          //   ItemSeparatorComponent={ItemSeparatorView}
+          renderItem={ItemView}
+        />
+      </View>
+
+      <View style={styles.orderContainer}>
+        <View style={{ flex: 1, flexDirection: "row" }}>
+          <View style={styles.promoContainer}>
+            <Text>Promo Code</Text>
+          </View>
+          <View style={styles.totalContainer}>
+            <Text>Total</Text>
+          </View>
+        </View>
+        <TouchableOpacity style={styles.placeOrderContainer}>
+          <Text>Place Order</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "white",
     padding: 5,
-
   },
   CounterView: {
     flexDirection: "row",
@@ -123,5 +136,30 @@ const styles = StyleSheet.create({
     width: 30,
     alignItems: "center",
     justifyContent: "center",
+  },
+  orderContainer: {
+    flex: 0.5,
+    backgroundColor: "yellow",
+    borderTopRightRadius: 5,
+    borderTopLeftRadius: 5,
+    flexDirection: "column",
+  },
+  promoContainer: {
+    backgroundColor: "orange",
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  totalContainer: {
+    backgroundColor: "red",
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  placeOrderContainer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "lightgreen",
   },
 });

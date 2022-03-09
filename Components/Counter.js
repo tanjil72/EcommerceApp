@@ -36,7 +36,7 @@ export default function Counter({price}) {
         </TouchableOpacity>
       </View>
       <View style={styles.priceText}>
-        <Text>{count>1?count*price:price}</Text>
+        <Text>${count>1?count*price:price}</Text>
       </View>
     </View>
   );
