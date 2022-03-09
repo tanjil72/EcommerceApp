@@ -22,10 +22,8 @@ export default function BottomComp({ item, price }) {
   };
 
   const handleCart = (item) => {
-    //console.log(item.title);
     dispatch(AddToCart(item));
     alert("Added to Cart")
-    // console.log(cartProducts)
   };
 
   return (
@@ -53,7 +51,7 @@ export default function BottomComp({ item, price }) {
           style={styles.AddToCart}
         >
           <Text style={styles.Text}>
-            $ {count == 0 ? price : price * count}
+            $ {price}
           </Text>
         </TouchableOpacity>
       </View>

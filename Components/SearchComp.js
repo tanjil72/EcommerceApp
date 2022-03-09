@@ -9,6 +9,10 @@ import { GetProducts } from "../redux/actions";
 const SearchComp = () => {
   const Products = useSelector((state) => state.ProductReducer.products);
   const dispatch = useDispatch();
+  
+  const [search, setSearch] = useState("");
+  const [filteredDataSource, setFilteredDataSource] = useState([]);
+  const [masterDataSource, setMasterDataSource] = useState([]);
   //const fetchProducts = () => dispatch(GetProducts());
   // console.log(Products)
 
@@ -19,9 +23,7 @@ const SearchComp = () => {
     //   console.log(masterDataSource)
   }, []);
 
-  const [search, setSearch] = useState("");
-  const [filteredDataSource, setFilteredDataSource] = useState([]);
-  const [masterDataSource, setMasterDataSource] = useState([]);
+
 
   const searchFilterFunction = (text) => {
     if (text) {
