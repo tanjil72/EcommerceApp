@@ -1,64 +1,30 @@
 import React, { useState } from "react";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import { useDispatch,useSelector } from "react-redux";
-import { AddToCart } from "../redux/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { AddToCart,countTotalPrice } from "../redux/actions";
 
-export default function BottomComp({ item, price }) {
-  const [count, setCount] = useState(0);
+export default function BottomComp({ item }) {
 
   const dispatch = useDispatch();
-  //const cartProducts = useSelector((state) => state.ProductReducer.cart);
-
-  const addCountHandler = () => {
-    setCount(count + 1);
-  };
-
-  const removeCountHandler = () => {
-    if (count === 0) {
-      return;
-    }
-    setCount(count - 1);
-  };
 
   const handleCart = (item) => {
-    dispatch(AddToCart(item));
-    alert("Added to Cart")
+    let quantity=1;
+    let total={...item,quantity}
+    dispatch(AddToCart(total));
+    // dispatch(countTotalPrice(total))
+    alert("Added to Cart");
   };
 
   return (
     <View style={styles.BottomButtonView} key={item}>
       <View style={styles.CounterView}>
-        {/* <TouchableOpacity
-          key={i}
-          style={styles.ButtonContainer}
-          onPress={addCountHandler}
-        >
-          <Text style={styles.Text}>+</Text>
-        </TouchableOpacity>
-
-        <Text style={{ padding: 10 }}>{count}</Text>
-
-        <TouchableOpacity
-          style={styles.ButtonContainer}
-          onPress={removeCountHandler}
-        >
-          <Text style={styles.Text}>-</Text>
-        </TouchableOpacity> */}
-
-        <TouchableOpacity
-          // onPress={() => console.log(i.title)}
-          style={styles.AddToCart}
-        >
-          <Text style={styles.Text}>
-            $ {price}
-          </Text>
-        </TouchableOpacity>
+        <View style={styles.AddToCart}>
+          <Text style={styles.Text}>$ {item.price}</Text>
+        </View>
       </View>
       <TouchableOpacity
-        onPress={() => {
-          handleCart(item);
-        }}
+        onPress={() => { handleCart(item)}}
         style={styles.AddToCart}
       >
         <Text style={styles.Text}>Add To</Text>

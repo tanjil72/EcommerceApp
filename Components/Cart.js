@@ -1,14 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   View,
   Text,
   FlatList,
   StyleSheet,
   TouchableOpacity,
-  Button,
 } from "react-native";
-import { Card, Paragraph } from "react-native-paper";
-import BottomComp from "./BottomComp";
+import { Card } from "react-native-paper";
 import { removeFromCart } from "../redux/actions";
 import { useSelector, useDispatch } from "react-redux";
 import Counter from "./Counter";
@@ -36,7 +34,7 @@ export default function Cart() {
             >
               <Card.Cover style={styles.image} source={{ uri: IMAGE_URL }} />
 
-              <Counter price={item.price} />
+              <Counter item={item} />
             </View>
             <Text style={styles.Title}>{item.title}</Text>
           </View>
@@ -48,7 +46,7 @@ export default function Cart() {
               backgroundColor: "black",
               alignItems: "center",
               borderTopLeftRadius: 5,
-              borderTopRightRadius:5
+              borderTopRightRadius: 5,
             }}
           >
             <Text style={{ padding: 5, color: "white" }}>Remove</Text>

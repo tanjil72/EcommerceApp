@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Cart from '../Components/Cart';
-import SearchComp from '../Components/SearchComp'
+import HomeComponent from '../Components/HomeComponent'
 import { NavigationContainer } from '@react-navigation/native';
 
 const Tab = createBottomTabNavigator();
@@ -11,7 +11,7 @@ function MyTabs() {
   return (
       <NavigationContainer>
     <Tab.Navigator>
-      <Tab.Screen name="Home" component={SearchComp}
+      <Tab.Screen name="Home" component={HomeComponent}
       options={{
         headerShown:false,
         tabBarLabel: 'Home',

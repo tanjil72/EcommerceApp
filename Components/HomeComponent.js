@@ -2,25 +2,22 @@ import React, { useState, useEffect } from "react";
 import {Text,StyleSheet,View,FlatList,ScrollView,StatusBar} from "react-native";
 import { SearchBar } from "react-native-elements";
 import { Card, Paragraph } from "react-native-paper";
-import BottomComp from "./BottomComp";
+import AddToCart from "./AddToCart";
 import { useSelector, useDispatch } from "react-redux";
 import { GetProducts } from "../redux/actions";
 
 const SearchComp = () => {
   const Products = useSelector((state) => state.ProductReducer.products);
   const dispatch = useDispatch();
-  
+
   const [search, setSearch] = useState("");
   const [filteredDataSource, setFilteredDataSource] = useState([]);
   const [masterDataSource, setMasterDataSource] = useState([]);
-  //const fetchProducts = () => dispatch(GetProducts());
-  // console.log(Products)
 
   useEffect(() => {
     dispatch(GetProducts());
     setFilteredDataSource(Products);
     setMasterDataSource(Products);
-    //   console.log(masterDataSource)
   }, []);
 
 
@@ -52,8 +49,6 @@ const SearchComp = () => {
         <Card
           key={item}
           style={{ marginBottom: 10 }}
-          //onPress={()=>console.log("Item Added")}
-          //onPress={() => getItem(item)}
         >
           <View style={styles.Content}>
             <Card.Cover style={styles.image} source={{ uri: IMAGE_URL }} />
@@ -62,27 +57,11 @@ const SearchComp = () => {
               <Paragraph>{item.description}</Paragraph>
             </ScrollView>
           </View>
-          <BottomComp item={item} price={item.price} />
+          <AddToCart item={item} />
         </Card>
       </View>
     );
   };
-
-  //   const ItemSeparatorView = () => {
-  //     return (
-  //       // Flat List Item Separator
-  //       <View
-  //         style={{
-  //           width: "100%",
-  //         }}
-  //       />
-  //     );
-  //   };
-
-  // const getItem = (item) => {
-  //   // Function for click on an item
-  //   alert("Id : " + item.id + " Title : " + item.title);
-  // };
 
   return (
     <View style={{ flex: 1, backgroundColor: "black" }}>
@@ -103,7 +82,6 @@ const SearchComp = () => {
             <FlatList
               data={filteredDataSource}
               keyExtractor={(item, index) => index.toString()}
-              //   ItemSeparatorComponent={ItemSeparatorView}
               renderItem={ItemView}
             />
           </View>

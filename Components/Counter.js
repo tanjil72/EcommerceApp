@@ -1,10 +1,21 @@
 import React, { useState } from "react";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import { useDispatch } from "react-redux";
+import { updateTotalPrice } from "../redux/actions";
 
-export default function Counter({price}) {
+export default function Counter({ item }) {
   const [count, setCount] = useState(1);
+  const dispatch=useDispatch();
   const addCountHandler = () => {
-    setCount(count + 1);
+    setCount(count+1)
+   
+      // let id=item.id;
+      // let quantity=count+1;
+      // let price=item.price*count;
+  
+      // console.log(price)
+      // console.log(quantity)
+    dispatch(updateTotalPrice(count+1,item));
   };
 
   const removeCountHandler = () => {
@@ -36,7 +47,7 @@ export default function Counter({price}) {
         </TouchableOpacity>
       </View>
       <View style={styles.priceText}>
-        <Text>${count>1?count*price:price}</Text>
+        <Text>${count > 1 ? count * item.price : item.price}</Text>
       </View>
     </View>
   );
