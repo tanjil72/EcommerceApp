@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -14,10 +14,24 @@ import Counter from "./Counter";
 export default function Cart() {
   const cartProducts = useSelector((state) => state.ProductReducer.cart);
   const dispatch = useDispatch();
-
+  const [TotalPrice, setTotal] = useState(0);
+  let total = 0;
   const RemoveItem = (item) => {
     dispatch(removeFromCart(item));
   };
+
+  useEffect(() => {
+    if (cartProducts) {
+      cartProducts.map((item) => {
+        let price = item.price;
+        let qty = item.quantity;
+        total += price * qty;
+        setTotal(total);
+      });
+    } else {
+      setTotal(0);
+    }
+  });
 
   const ItemView = ({ item }) => {
     const IMAGE_URL = item.image;
@@ -73,10 +87,13 @@ export default function Cart() {
             <Text>Promo Code</Text>
           </View>
           <View style={styles.totalContainer}>
-            <Text>Total</Text>
+            <Text>${TotalPrice}</Text>
           </View>
         </View>
-        <TouchableOpacity style={styles.placeOrderContainer}>
+        <TouchableOpacity
+          onPress={() => console.log(TotalPrice)}
+          style={styles.placeOrderContainer}
+        >
           <Text>Place Order</Text>
         </TouchableOpacity>
       </View>

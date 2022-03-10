@@ -19,7 +19,7 @@ function MyTabs() {
           <MaterialCommunityIcons name="home" color={color} size={size} />
         ),
       }} />
-      <Tab.Screen name="Tab2" component={Cart}
+      <Tab.Screen name="Cart" component={Cart}
       options={{
         headerShown:false,
         tabBarLabel: 'Cart',

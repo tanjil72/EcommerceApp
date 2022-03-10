@@ -6,15 +6,10 @@ import { updateTotalPrice } from "../redux/actions";
 export default function Counter({ item }) {
   const [count, setCount] = useState(1);
   const dispatch=useDispatch();
+
+  
   const addCountHandler = () => {
     setCount(count+1)
-   
-      // let id=item.id;
-      // let quantity=count+1;
-      // let price=item.price*count;
-  
-      // console.log(price)
-      // console.log(quantity)
     dispatch(updateTotalPrice(count+1,item));
   };
 
@@ -22,7 +17,9 @@ export default function Counter({ item }) {
     if (count === 1) {
       return;
     }
-    setCount(count - 1);
+    setCount(count - 1)
+    dispatch(updateTotalPrice(count-1,item))
+    
   };
 
   return (

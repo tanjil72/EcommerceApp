@@ -1,7 +1,7 @@
 export const GET_PRODUCTS = "GET_PRODUCTS";
 export const ADD_TO_CART = "ADD_TO_CART";
 export const REMOVE_CART_ITEM="REMOVE_CART_ITEM";
-export const UPDATE_TOTAL_PRICE="UPDATE_TOTAL_PRICE";
+export const UPDATE_QUANTITY="UPDATE_QUANTITY";
 const API_URL = "https://fakestoreapi.com/products";
 // const API_KEY = "e07e021506d25ba87814281a91ba6bcd";
 // const PARAMS = "page=1";
@@ -45,11 +45,12 @@ export const removeFromCart = (item) => {
 };
 
 export const updateTotalPrice = (quantity,item) => {
-  console.log(quantity)
+  //console.log(quantity)
+  let total={...item,quantity}
   return (dispatch) => {
     dispatch({
-      type: UPDATE_TOTAL_PRICE,
-      payload: item,
+      type: UPDATE_QUANTITY,
+      payload: total,
     })
   };
 };
