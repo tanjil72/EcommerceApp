@@ -13,24 +13,26 @@ import Counter from "./Counter";
 
 export default function Cart() {
   const cartProducts = useSelector((state) => state.ProductReducer.cart);
-  const dispatch = useDispatch();
   const [TotalPrice, setTotal] = useState(0);
+  // if(cartProducts && !cartProducts.length){
+  //   setTotal(0)
+  // }
+  const dispatch = useDispatch();
+  
   let total = 0;
   const RemoveItem = (item) => {
     dispatch(removeFromCart(item));
-
   };
 
   useEffect(() => {
-      cartProducts.map((item) => {
-        let price = item.price;
-        let qty = item.quantity;
-        total += price * qty;
-        setTotal(total);
-      });
+    cartProducts.map((item) => {
+      let price = item.price;
+      let qty = item.quantity;
+      total += price * qty;
+      setTotal(total);
+    });
 
-      console.log("Calling useeffect:")
-     
+    // console.log("Calling useeffect:")
   });
 
   const ItemView = ({ item }) => {
@@ -47,7 +49,6 @@ export default function Cart() {
               }}
             >
               <Card.Cover style={styles.image} source={{ uri: IMAGE_URL }} />
-
               <Counter item={item} />
             </View>
             <Text style={styles.Title}>{item.title}</Text>
@@ -86,7 +87,7 @@ export default function Cart() {
             <Text>Promo Code</Text>
           </View>
           <View style={styles.totalContainer}>
-            <Text>{TotalPrice}</Text>
+            <Text>${(cartProducts && !cartProducts.length)?0:TotalPrice}</Text>
           </View>
         </View>
         <TouchableOpacity

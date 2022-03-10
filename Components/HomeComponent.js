@@ -1,35 +1,43 @@
 import React, { useState, useEffect } from "react";
-import {Text,StyleSheet,View,FlatList,ScrollView,StatusBar} from "react-native";
+import {
+  Text,
+  StyleSheet,
+  View,
+  FlatList,
+  ScrollView,
+  StatusBar,
+} from "react-native";
 import { SearchBar } from "react-native-elements";
 import { Card, Paragraph } from "react-native-paper";
 import AddToCart from "./AddToCart";
 import { useSelector, useDispatch } from "react-redux";
-import { GetProducts } from "../redux/actions";
+//import { GetProducts } from "../redux/actions";
 
 const HomeComponent = () => {
-  const Products = useSelector((state) => state.ProductReducer.products);
+  const API_URL = "https://fakestoreapi.com/products";
+  //const Products = useSelector((state) => state.ProductReducer.products);
   const dispatch = useDispatch();
 
   const [search, setSearch] = useState("");
   const [filteredDataSource, setFilteredDataSource] = useState([]);
   const [masterDataSource, setMasterDataSource] = useState([]);
 
-
   useEffect(() => {
-    dispatch(GetProducts());
+    //dispatch(GetProducts());
+    
+    fetch(API_URL)
+    .then((response) => response.json())
+    .then((response) => {
+      setFilteredDataSource(response);
+      setMasterDataSource(response);
+      //dispatch(GetProducts(response));
+    })
+    .catch((err) => {
+      console.error(err);
+    });
 
-    if(Products){
-      setFilteredDataSource(Products);
-      setMasterDataSource(Products);
-      //console.log("Calling Effect")
-    }
-  },[]);
-  setTimeout(() => {
-    setFilteredDataSource(Products);
-    setMasterDataSource(Products);
-    //console.log("Call Time")
-  }, 1);
 
+  }, []);
 
 
   const searchFilterFunction = (text) => {
@@ -52,13 +60,8 @@ const HomeComponent = () => {
   const ItemView = ({ item }) => {
     const IMAGE_URL = item.image;
     return (
-
-      
       <View style={styles.container}>
-        <Card
-          key={item}
-          style={{ marginBottom: 10 }}
-        >
+        <Card key={item} style={{ marginBottom: 10 }}>
           <View style={styles.Content}>
             <Card.Cover style={styles.image} source={{ uri: IMAGE_URL }} />
             <ScrollView style={styles.ProductDetails}>
@@ -75,7 +78,7 @@ const HomeComponent = () => {
   return (
     <View style={{ flex: 1, backgroundColor: "black" }}>
       <StatusBar hidden />
-      {Products ? (
+      {masterDataSource ? (
         <View style={{ flex: 1 }}>
           <SearchBar
             containerStyle={styles.SearchContainer}
@@ -96,7 +99,7 @@ const HomeComponent = () => {
           </View>
         </View>
       ) : (
-        console.log(Products)
+        <Text>Getting Data.....</Text>
       )}
     </View>
   );
