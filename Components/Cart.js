@@ -18,19 +18,19 @@ export default function Cart() {
   let total = 0;
   const RemoveItem = (item) => {
     dispatch(removeFromCart(item));
+
   };
 
   useEffect(() => {
-    if (cartProducts) {
       cartProducts.map((item) => {
         let price = item.price;
         let qty = item.quantity;
         total += price * qty;
         setTotal(total);
       });
-    } else {
-      setTotal(0);
-    }
+
+      console.log("Calling useeffect:")
+     
   });
 
   const ItemView = ({ item }) => {
@@ -76,7 +76,6 @@ export default function Cart() {
         <FlatList
           data={cartProducts}
           keyExtractor={(item, index) => index.toString()}
-          //   ItemSeparatorComponent={ItemSeparatorView}
           renderItem={ItemView}
         />
       </View>
@@ -87,7 +86,7 @@ export default function Cart() {
             <Text>Promo Code</Text>
           </View>
           <View style={styles.totalContainer}>
-            <Text>${TotalPrice}</Text>
+            <Text>{TotalPrice}</Text>
           </View>
         </View>
         <TouchableOpacity

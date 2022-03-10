@@ -1,8 +1,11 @@
 import { StatusBar } from "expo-status-bar";
-import React from "react";
+import React, { useEffect } from "react";
 import { View, Text, StyleSheet } from "react-native";
+import { useSelector, useDispatch } from "react-redux";
+import { GetProducts } from "../redux/actions";
 
 export default function Header() {
+
   return (
     <View style={styles.container}>
       <StatusBar hidden />

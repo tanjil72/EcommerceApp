@@ -1,13 +1,16 @@
-import React, {Component} from "react";
+import React, {Component, useEffect} from "react";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Cart from '../Components/Cart';
 import HomeComponent from '../Components/HomeComponent'
 import { NavigationContainer } from '@react-navigation/native';
 
+
 const Tab = createBottomTabNavigator();
 
-function MyTabs() {
+const MyTabs=()=> {
+
+
   return (
       <NavigationContainer>
     <Tab.Navigator>

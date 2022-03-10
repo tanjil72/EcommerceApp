@@ -11,6 +11,7 @@ const initialState = {
 function ProductReducer(state = initialState, action) {
   switch (action.type) {
     case GET_PRODUCTS:
+      // console.log("Getting product")
       return { ...state, products: action.payload };
     case ADD_TO_CART:
       if (state.cart.some((item) => item.id === action.payload.id)) {
@@ -23,24 +24,24 @@ function ProductReducer(state = initialState, action) {
         (item) => item.id != action.payload.id
       );
       return { ...state, cart: updatedCart };
-      // console.log(state.cart)
+    // console.log(state.cart)
     case UPDATE_QUANTITY:
       const item = state.cart.find(
-        product => product.id === action.payload.id,
+        (product) => product.id === action.payload.id
       );
       if (item) {
         return {
           ...state,
-          cart: state.cart.map(item => item.id === action.payload.id
-            ? {
-              ...item,
-              quantity: action.payload.quantity,
-            }
-            : item
+          cart: state.cart.map((item) =>
+            item.id === action.payload.id
+              ? {
+                  ...item,
+                  quantity: action.payload.quantity,
+                }
+              : item
           ),
-        }}
-      
-      
+        };
+      }
 
     default:
       return state;

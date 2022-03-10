@@ -6,7 +6,7 @@ import AddToCart from "./AddToCart";
 import { useSelector, useDispatch } from "react-redux";
 import { GetProducts } from "../redux/actions";
 
-const SearchComp = () => {
+const HomeComponent = () => {
   const Products = useSelector((state) => state.ProductReducer.products);
   const dispatch = useDispatch();
 
@@ -14,11 +14,21 @@ const SearchComp = () => {
   const [filteredDataSource, setFilteredDataSource] = useState([]);
   const [masterDataSource, setMasterDataSource] = useState([]);
 
+
   useEffect(() => {
     dispatch(GetProducts());
+
+    if(Products){
+      setFilteredDataSource(Products);
+      setMasterDataSource(Products);
+      //console.log("Calling Effect")
+    }
+  },[]);
+  setTimeout(() => {
     setFilteredDataSource(Products);
     setMasterDataSource(Products);
-  }, []);
+    //console.log("Call Time")
+  }, 1);
 
 
 
@@ -41,7 +51,6 @@ const SearchComp = () => {
 
   const ItemView = ({ item }) => {
     const IMAGE_URL = item.image;
-    
     return (
 
       
@@ -87,7 +96,7 @@ const SearchComp = () => {
           </View>
         </View>
       ) : (
-        <Text>Getting Data......</Text>
+        console.log(Products)
       )}
     </View>
   );
@@ -139,4 +148,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SearchComp;
+export default HomeComponent;
