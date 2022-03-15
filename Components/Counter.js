@@ -44,7 +44,7 @@ export default function Counter({ item }) {
         </TouchableOpacity>
       </View>
       <View style={styles.priceText}>
-        <Text style={{color:'white'}}>${count > 1 ? count * item.price : item.price}</Text>
+        <Text style={{color:'white'}}>${count > 1 ? (count * item.price).toFixed(2) : (item.price).toFixed(2)}</Text>
       </View>
     </View>
   );
