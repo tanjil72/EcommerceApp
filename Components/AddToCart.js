@@ -19,10 +19,7 @@ export default function BottomComp({ item }) {
   return (
     
       <View style={styles.CounterView}>
-        {/* <View style={styles.AddToCart}>
-          <Text style={styles.Text}>$ {item.price}</Text>
-        </View> */}
-        <Text style={{color:'black',fontWeight:'700',paddingLeft:10,fontSize:16}}>$ {item.price}</Text>
+        <Text style={{color:'black',fontWeight:'bold',paddingLeft:10,fontSize:20}}>${item.price}</Text>
         <TouchableOpacity
         onPress={() => { handleCart(item)}}
         style={styles.AddToCart}

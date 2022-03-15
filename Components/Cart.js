@@ -79,12 +79,9 @@ export default function Cart() {
 
     <View style={styles.orderContainer}>
       <View style={{ flex: 1, flexDirection: "row" }}>
-        {/* <View style={styles.promoContainer}>
-          <Text>Promo Code</Text>
-        </View> */}
         <View style={styles.totalContainer}>
           <Text style={{fontSize:20}}>
-            Total: {cartProducts && !cartProducts.length ? 0 : TotalPrice.toFixed(2)}$
+            Total: {TotalPrice.toFixed(2)}$
           </Text>
         </View>
         <TouchableOpacity
