@@ -14,11 +14,12 @@ import Counter from "./Counter";
 export default function Cart() {
   const cartProducts = useSelector((state) => state.ProductReducer.cart);
   const [TotalPrice, setTotal] = useState(0);
+  const [CountTotal, setCountTotal] = useState(false);
   // if(cartProducts && !cartProducts.length){
   //   setTotal(0)
   // }
   const dispatch = useDispatch();
-  
+
   let total = 0;
   const RemoveItem = (item) => {
     dispatch(removeFromCart(item));
@@ -45,7 +46,7 @@ export default function Cart() {
               style={{
                 flex: 1,
                 flexDirection: "row",
-                backgroundColor: "skyblue",
+                backgroundColor: "#d1d8e0",
               }}
             >
               <Card.Cover style={styles.image} source={{ uri: IMAGE_URL }} />
@@ -57,14 +58,9 @@ export default function Cart() {
             onPress={() => {
               RemoveItem(item);
             }}
-            style={{
-              backgroundColor: "black",
-              alignItems: "center",
-              borderTopLeftRadius: 5,
-              borderTopRightRadius: 5,
-            }}
+            style={{backgroundColor:'#b33939',alignItems:'center',flex:1,borderBottomLeftRadius:5,borderBottomRightRadius:5}}
           >
-            <Text style={{ padding: 5, color: "white" }}>Remove</Text>
+            <Text style={{color:'white',padding:5}}>Remove</Text>
           </TouchableOpacity>
         </Card>
       </View>
@@ -72,32 +68,36 @@ export default function Cart() {
   };
 
   return (
-    <View style={{ backgroundColor: "brown", flex: 1 }}>
-      <View style={{ flex: 3 }}>
-        <FlatList
-          data={cartProducts}
-          keyExtractor={(item, index) => index.toString()}
-          renderItem={ItemView}
-        />
-      </View>
+    cartProducts.length===0?(<View style={{flex:1,justifyContent:'center',alignItems:'center',backgroundColor:'#d1d8e0'}}><Text style={{fontWeight:'bold',fontSize:20}}>No items in the Cart</Text></View>):(<View style={{ backgroundColor: "#CAD3C8", flex: 1 }}>
+    <View style={{ flex: 3 }}>
+      <FlatList
+        data={cartProducts}
+        keyExtractor={(item, index) => index.toString()}
+        renderItem={ItemView}
+      />
+    </View>
 
-      <View style={styles.orderContainer}>
-        <View style={{ flex: 1, flexDirection: "row" }}>
-          <View style={styles.promoContainer}>
-            <Text>Promo Code</Text>
-          </View>
-          <View style={styles.totalContainer}>
-            <Text>${(cartProducts && !cartProducts.length)?0:TotalPrice}</Text>
-          </View>
+    <View style={styles.orderContainer}>
+      <View style={{ flex: 1, flexDirection: "row" }}>
+        {/* <View style={styles.promoContainer}>
+          <Text>Promo Code</Text>
+        </View> */}
+        <View style={styles.totalContainer}>
+          <Text style={{fontSize:20}}>
+            Total: {cartProducts && !cartProducts.length ? 0 : TotalPrice.toFixed(2)}$
+          </Text>
         </View>
         <TouchableOpacity
-          onPress={() => console.log(TotalPrice)}
+          onPress={() =>
+            console.log(cartProducts && !cartProducts.length ? 0 : TotalPrice.toFixed(2))
+          }
           style={styles.placeOrderContainer}
         >
-          <Text>Place Order</Text>
+          <Text style={{fontSize:16,fontWeight:'bold'}}>Order Now</Text>
         </TouchableOpacity>
       </View>
     </View>
+  </View>)
   );
 }
 
@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   ProductDetails: {
-    backgroundColor: "skyblue",
+    backgroundColor: "#CAD3C8",
     width: "100%",
     height: 100,
     paddingLeft: 5,
@@ -129,7 +129,6 @@ const styles = StyleSheet.create({
   },
   Title: {
     fontSize: 15,
-    fontWeight: "bold",
     paddingBottom: 10,
     flexShrink: 1,
   },
@@ -166,7 +165,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   totalContainer: {
-    backgroundColor: "red",
+    backgroundColor: "#f7f1e3",
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
@@ -175,6 +174,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "lightgreen",
+    backgroundColor: "#33d9b2",
   },
 });

@@ -8,7 +8,7 @@ import BottomTabNavigator from "./BottomTab/BottomTabNavigator";
 const App = () => {
   return (
     <Provider store={store}>
-      <Header />
+      {/* <Header /> */}
       <BottomTabNavigator />
     </Provider>
   );

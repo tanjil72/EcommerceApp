@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
   Text,
   StyleSheet,
@@ -11,11 +11,11 @@ import { SearchBar } from "react-native-elements";
 import { Card, Paragraph } from "react-native-paper";
 import AddToCart from "./AddToCart";
 import { useSelector, useDispatch } from "react-redux";
-//import { GetProducts } from "../redux/actions";
+import { GetProducts } from "../redux/actions";
 
 const HomeComponent = () => {
   const API_URL = "https://fakestoreapi.com/products";
-  //const Products = useSelector((state) => state.ProductReducer.products);
+  const Products = useSelector((state) => state.ProductReducer.products);
   const dispatch = useDispatch();
 
   const [search, setSearch] = useState("");
@@ -23,8 +23,13 @@ const HomeComponent = () => {
   const [masterDataSource, setMasterDataSource] = useState([]);
 
   useEffect(() => {
-    //dispatch(GetProducts());
-    
+    // dispatch(GetProducts());
+    // //console.log(Products);
+    // setFilteredDataSource(Products);
+    // setMasterDataSource(Products);
+    // //console.log(masterDataSource)
+    // console.log(filteredDataSource)
+
     fetch(API_URL)
     .then((response) => response.json())
     .then((response) => {
@@ -35,10 +40,9 @@ const HomeComponent = () => {
     .catch((err) => {
       console.error(err);
     });
-
-
   }, []);
 
+  //console.log('returned :', Products );
 
   const searchFilterFunction = (text) => {
     if (text) {
@@ -107,11 +111,11 @@ const HomeComponent = () => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "black",
+    backgroundColor: '#CAD3C8',
     padding: 5,
   },
   FlatlistContainer: {
-    backgroundColor: "black",
+    backgroundColor: "#CAD3C8",
     padding: 5,
     flex: 1,
   },
@@ -130,7 +134,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 5,
   },
   ProductDetails: {
-    backgroundColor: "skyblue",
+    backgroundColor: "#d1d8e0",
     width: "100%",
     height: 100,
     paddingLeft: 5,

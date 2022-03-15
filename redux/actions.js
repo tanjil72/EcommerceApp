@@ -7,27 +7,23 @@ const API_URL = "https://fakestoreapi.com/products";
 // const PARAMS = "page=1";
 // const BASE_URL = `${API_URL}?api_key=${API_KEY}&${PARAMS}`;
 
-// export const GetProducts = (response) => {
+export const GetProducts = () => {
   
-//   return (dispatch) => {
-//     dispatch({
-//             type: GET_PRODUCTS,
-//             payload: response,
-//           });
-
-//     // fetch(API_URL)
-//     //   .then((response) => response.json())
-//     //   .then((response) => {
-//     //     dispatch({
-//     //       type: GET_PRODUCTS,
-//     //       payload: response,
-//     //     });
-//     //   })
-//     //   .catch((err) => {
-//     //     console.error(err);
-//     //   });
-//   };
-// };
+  return (dispatch) => {
+    fetch(API_URL)
+      .then((response) => response.json())
+      .then((response) => {
+        dispatch({
+          type: GET_PRODUCTS,
+          payload: response,
+          
+        });
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+};
 
 export const AddToCart = (item) => {
   return (dispatch) => {

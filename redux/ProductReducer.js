@@ -5,14 +5,14 @@ import {
   UPDATE_QUANTITY,
 } from "./actions";
 const initialState = {
-  //products: [],
+  products: [],
   cart: [],
 };
 function ProductReducer(state = initialState, action) {
   switch (action.type) {
-    // case GET_PRODUCTS:
-    //   // console.log("Getting product")
-    //   return { ...state, products: action.payload };
+    case GET_PRODUCTS:
+      console.log(action.payload)
+      return { ...state, products: action.payload };
     case ADD_TO_CART:
       if (state.cart.some((item) => item.id === action.payload.id)) {
         return state;

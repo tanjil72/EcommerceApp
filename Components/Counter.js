@@ -44,7 +44,7 @@ export default function Counter({ item }) {
         </TouchableOpacity>
       </View>
       <View style={styles.priceText}>
-        <Text>${count > 1 ? count * item.price : item.price}</Text>
+        <Text style={{color:'white'}}>${count > 1 ? count * item.price : item.price}</Text>
       </View>
     </View>
   );
@@ -66,7 +66,8 @@ const styles = StyleSheet.create({
   CounterText: {
     marginLeft: 10,
     marginRight: 10,
-    color: "white",
+    color: "black",
+    
   },
   TextContainer: {
     alignItems: "center",
@@ -89,7 +90,7 @@ const styles = StyleSheet.create({
     color: "white",
   },
   priceText: {
-    backgroundColor: "white",
+    backgroundColor: "black",
     width: 80,
     height: 30,
     justifyContent: "center",

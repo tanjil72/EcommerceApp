@@ -17,13 +17,13 @@ export default function BottomComp({ item }) {
   };
 
   return (
-    <View style={styles.BottomButtonView} key={item}>
+    
       <View style={styles.CounterView}>
-        <View style={styles.AddToCart}>
+        {/* <View style={styles.AddToCart}>
           <Text style={styles.Text}>$ {item.price}</Text>
-        </View>
-      </View>
-      <TouchableOpacity
+        </View> */}
+        <Text style={{color:'black',fontWeight:'700',paddingLeft:10,fontSize:16}}>$ {item.price}</Text>
+        <TouchableOpacity
         onPress={() => { handleCart(item)}}
         style={styles.AddToCart}
       >
@@ -42,6 +42,8 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     paddingBottom: 5,
     paddingLeft: 5,
+    backgroundColor:'#7f8fa6',
+
   },
   ButtonContainer: {
     backgroundColor: "black",
@@ -63,12 +65,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 10,
-    marginRight: 5,
     flexDirection: "row",
   },
   CounterView: {
     flexDirection: "row",
     alignItems: "center",
+    justifyContent:'space-between',
+    padding:5
   },
   Text: {
     color: "white",
