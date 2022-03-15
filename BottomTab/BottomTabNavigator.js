@@ -6,17 +6,18 @@ import HomeComponent from "../Components/HomeComponent";
 import { NavigationContainer } from "@react-navigation/native";
 import { Avatar, Badge, Icon, withBadge } from "react-native-elements";
 import { useSelector, useDispatch } from "react-redux";
+import Profile from "../Components/Profile";
 
 const Tab = createBottomTabNavigator();
 const MyTheme = {
   dark: false,
   colors: {
-    primary: 'white',
-    background: 'red',
-    card: '#7f8fa6',
-    text: 'black',
-    border: 'black',
-    notification: 'red',
+    primary: "white",
+    background: "red",
+    card: "#7f8fa6",
+    text: "black",
+    border: "black",
+    notification: "red",
   },
 };
 
@@ -25,6 +26,7 @@ const MyTabs = () => {
   const BadgedIcon =
     cartProducts.length === 0 ? Icon : withBadge(cartProducts.length)(Icon);
   const HomeIcon = Icon;
+  const ProfileIcon = Icon;
   return (
     <NavigationContainer theme={MyTheme}>
       <Tab.Navigator>
@@ -48,6 +50,18 @@ const MyTabs = () => {
             tabBarIcon: ({ color, size }) => (
               //<MaterialCommunityIcons name="cart" color={color} size={size} />,
               <BadgedIcon type="ionicon" name="ios-cart" />
+            ),
+          }}
+        />
+
+        <Tab.Screen
+          name="Profile"
+          component={Profile}
+          options={{
+            headerShown: false,
+            tabBarIcon: ({ color, size }) => (
+              //<MaterialCommunityIcons name="cart" color={color} size={size} />,
+              <ProfileIcon type="ionicon" name="person" />
             ),
           }}
         />

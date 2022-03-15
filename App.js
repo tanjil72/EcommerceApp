@@ -1,16 +1,25 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
 import Header from "./Components/Header";
 import BottomTabNavigator from "./BottomTab/BottomTabNavigator";
+import SplashScreen from "./Components/SplashScreen";
+
 
 
 const App = () => {
+  const [splash,setSplash]=useState(false)
+
+  useEffect(()=>{
+    setTimeout(()=>{
+      setSplash(true)
+    },3000)
+  })
   return (
-    <Provider store={store}>
-      {/* <Header /> */}
+    splash?(<Provider store={store}>
       <BottomTabNavigator />
-    </Provider>
+    </Provider>):<SplashScreen/>
+ 
   );
 };
 

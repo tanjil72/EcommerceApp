@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
   },
   totalContainer: {
     backgroundColor: "#f7f1e3",
-    flex: 1,
+    flex: 2,
     alignItems: "center",
     justifyContent: "center",
   },

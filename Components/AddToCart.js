@@ -24,7 +24,7 @@ export default function BottomComp({ item }) {
         onPress={() => { handleCart(item)}}
         style={styles.AddToCart}
       >
-        <Text style={styles.Text}>Add To</Text>
+        <Text style={styles.Text}>ADD=></Text>
         <MaterialCommunityIcons name="cart" color="white" size={20} />
       </TouchableOpacity>
     </View>
