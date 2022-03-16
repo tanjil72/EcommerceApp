@@ -1,11 +1,16 @@
-import React from "react";
-import { StatusBar, Text, View, Image } from "react-native";
+import React, { useState,useContext } from "react";
+import { Text, View, Image, TouchableOpacity } from "react-native";
 import { TextInput, Button } from "react-native-paper";
+import BottomTabNavigator from '../BottomTab/BottomTabNavigator'
 
-export default function LoginScreen({LoginHandler,text,setText}) {
+export default function LoginScreen({ navigation },LoginHandler) {
+   
+  const [LoginVal, setLogin] = useState(false);
+  const [text, setText] = useState("");
+  //console.log(LoginHandler)
   
-
   return (
+      
     <View
       style={{
         flex: 1,
@@ -15,7 +20,12 @@ export default function LoginScreen({LoginHandler,text,setText}) {
       }}
     >
       <View
-        style={{ justifyContent: "center", alignItems: "center", padding: 10,marginTop:-100 }}
+        style={{
+          justifyContent: "center",
+          alignItems: "center",
+          padding: 10,
+          marginTop: -100,
+        }}
       >
         <Image
           source={require("../assets/cart.png")}
@@ -51,10 +61,20 @@ export default function LoginScreen({LoginHandler,text,setText}) {
         <Button
           style={{ width: 100 }}
           mode="contained"
-          onPress={LoginHandler}
+          onPress={()=>LoginHandler}
         >
           Login
         </Button>
+
+        <View style={{ flexDirection: "row", marginTop: 10 }}>
+          <Text>Don't have any account?</Text>
+          <TouchableOpacity
+            style={{ marginLeft: 5 }}
+            onPress={() => navigation.navigate("Signup")}
+          >
+            <Text style={{ color: "blue" }}>SignUp</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );

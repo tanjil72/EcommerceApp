@@ -4,10 +4,10 @@ import { store } from "./redux/store";
 import Header from "./Components/Header";
 import BottomTabNavigator from "./BottomTab/BottomTabNavigator";
 import SplashScreen from "./Components/SplashScreen";
-import LoginScreen from "./Components/LoginScreen";
-import { Text } from "react-native";
+import Register from "./Components/Register";
 
 const App = () => {
+
   const [splash, setSplash] = useState(false);
   const [Login, setLogin] = useState(false);
   const [text, setText] = useState("");
@@ -20,16 +20,18 @@ const App = () => {
 
   const LoginHandler = () => {
     setLogin(true);
+    console.log("Calling login")
   };
 
   return splash ? (
+
     <Provider store={store}>
-      {Login && text==='Tanjil' ? (
+
+      {Login? (
         <BottomTabNavigator />
       ) : (
-        <LoginScreen LoginHandler={LoginHandler} text={text} setText={setText} />
+        <Register/>
       )}
-      {/* <BottomTabNavigator /> */}
     </Provider>
   ) : (
     <SplashScreen />
