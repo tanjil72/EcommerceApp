@@ -1,11 +1,11 @@
-import React, { Component, useEffect } from "react";
+import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+// import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Cart from "../Components/Cart";
 import HomeComponent from "../Components/HomeComponent";
 import { NavigationContainer } from "@react-navigation/native";
-import { Avatar, Badge, Icon, withBadge } from "react-native-elements";
-import { useSelector, useDispatch } from "react-redux";
+import { Icon, withBadge } from "react-native-elements";
+import { useSelector } from "react-redux";
 import Profile from "../Components/Profile";
 
 const Tab = createBottomTabNavigator();
@@ -66,7 +66,8 @@ const MyTabs = () => {
           }}
         />
       </Tab.Navigator>
-    </NavigationContainer>
+      </NavigationContainer>
+    
   );
 };
 

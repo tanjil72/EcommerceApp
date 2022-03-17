@@ -1,16 +1,34 @@
-import React, { useState,useContext } from "react";
+import React, { useState, useContext } from "react";
 import { Text, View, Image, TouchableOpacity } from "react-native";
 import { TextInput, Button } from "react-native-paper";
-import BottomTabNavigator from '../BottomTab/BottomTabNavigator'
+import BottomTabNavigator from "../BottomTab/BottomTabNavigator";
+import { Login, useAuth } from "../firebase";
+import SignUpScreen from "./SignupScreen";
+import { Context } from "./Register";
 
-export default function LoginScreen({ navigation },LoginHandler) {
-   
-  const [LoginVal, setLogin] = useState(false);
-  const [text, setText] = useState("");
-  //console.log(LoginHandler)
-  
-  return (
-      
+export default function LoginScreen({ navigation, handleLogin }) {
+  const [isLogin, setIsLogin] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { CheckLogin } = React.useContext(Context);
+  const currentUser = useAuth();
+  const LoginHandler = () => {
+    Login(email, password)
+      .then(function onSuccess(...args) {
+        CheckLogin(true)
+      })
+      .catch(function onFailure(err) {
+        alert("Error email/password!")
+      });
+  };
+
+  const Signup = () => {
+    setIsLogin(true);
+  };
+
+  return isLogin ? (
+    <SignUpScreen />
+  ) : (
     <View
       style={{
         flex: 1,
@@ -41,15 +59,15 @@ export default function LoginScreen({ navigation },LoginHandler) {
         label="Email"
         type="outlined"
         style={{ height: 50, backgroundColor: "#CAD3C8", marginBottom: 10 }}
-        value={text}
-        onChangeText={(text) => setText(text)}
+        value={email}
+        onChangeText={(text) => setEmail(text)}
       />
       <TextInput
         label="Password"
         type="outlined"
         style={{ height: 50, backgroundColor: "#CAD3C8" }}
-        value={text}
-        onChangeText={(text) => setText(text)}
+        value={password}
+        onChangeText={(text) => setPassword(text)}
       />
       <View
         style={{
@@ -58,20 +76,13 @@ export default function LoginScreen({ navigation },LoginHandler) {
           marginTop: 10,
         }}
       >
-        <Button
-          style={{ width: 100 }}
-          mode="contained"
-          onPress={()=>LoginHandler}
-        >
+        <Button style={{ width: 100 }} mode="contained" onPress={LoginHandler}>
           Login
         </Button>
 
         <View style={{ flexDirection: "row", marginTop: 10 }}>
           <Text>Don't have any account?</Text>
-          <TouchableOpacity
-            style={{ marginLeft: 5 }}
-            onPress={() => navigation.navigate("Signup")}
-          >
+          <TouchableOpacity style={{ marginLeft: 5 }} onPress={Signup}>
             <Text style={{ color: "blue" }}>SignUp</Text>
           </TouchableOpacity>
         </View>

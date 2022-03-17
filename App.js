@@ -18,10 +18,10 @@ const App = () => {
     }, 3000);
   }, []);
 
-  const LoginHandler = () => {
-    setLogin(true);
-    console.log("Calling login")
-  };
+  // const LoginHandler = () => {
+  //   setLogin(true);
+  //   console.log("Calling login")
+  // };
 
   return splash ? (
 

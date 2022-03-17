@@ -1,20 +1,20 @@
-import React, { useState,createContext  } from "react";
+import React, { useState, createContext } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import SignUpScreen from "./SignupScreen";
 import LoginScreen from "./LoginScreen";
-import BottomTabNavigator from '../BottomTab/BottomTabNavigator'
+import BottomTabNavigator from "../BottomTab/BottomTabNavigator";
+import { StatusBar } from "react-native";
 
-const Context = createContext('Default Value');
+export const Context = createContext("Default Value");
 const Stack = createStackNavigator();
 
-function MyStack(LoginHandler) {
-  //console.log(LoginHandler)
+function MyStack() {
   return (
+    
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Login">
-      {props => <LoginScreen {...props} LoginHandler={LoginHandler} />}
-      </Stack.Screen>
+      
+      <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="Signup" component={SignUpScreen} />
     </Stack.Navigator>
   );
@@ -23,15 +23,21 @@ function MyStack(LoginHandler) {
 export default function Register() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  function updateState(){
-    setIsLoggedIn(true)
-    console.log(isLoggedIn)
-}
+  function CheckLogin(value) {
+    setIsLoggedIn(value);
+    //console.log("Calling")
+  }
+
   return isLoggedIn ? (
-     <BottomTabNavigator/>
+    <Context.Provider value={{ CheckLogin }}>
+    <BottomTabNavigator />
+    </Context.Provider>
   ) : (
     <NavigationContainer>
-      <MyStack LoginHandler={updateState}/>
+      <StatusBar hidden />
+      <Context.Provider value={{ CheckLogin }}>
+        <MyStack />
+      </Context.Provider>
     </NavigationContainer>
   );
 }
